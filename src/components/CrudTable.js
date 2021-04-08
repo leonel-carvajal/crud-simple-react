@@ -1,7 +1,7 @@
 import React from 'react'
 import CrudTableRow from './CrudTableRow'
 
-const CrudTable = ({data}) => {
+const CrudTable = ({data,deleteData,setdatatoEdit}) => {
   return (
     <div>
       <h2>Tabla de datos</h2>
@@ -17,7 +17,12 @@ const CrudTable = ({data}) => {
           {
             data.length === 0 ? <tr><td colSpan='3'>Sin datos</td></tr> :
               data.map(el => (
-                <CrudTableRow key={el.id} el={el}/>
+                <CrudTableRow
+                  deleteData={deleteData}
+                  el={el}
+                  key={el.id}
+                  setdatatoEdit={setdatatoEdit}
+                  />
               ))
           }
         </tbody>

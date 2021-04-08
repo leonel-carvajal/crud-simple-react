@@ -32,21 +32,40 @@ const initialDb = [
 ]
 const CrudApp = () => {
   const [bd, setBd] = useState(initialDb);
+  const [datatoEdit, setdatatoEdit] = useState(null);
+
   const createData  =(data)=>{
-
+    data.id = Date.now()
+    setBd([...bd, data])
   }
-  const updateDate =(data)=>{
-
+  const updateData =(data)=>{
+    let newData = bd.map(el => el.id === data.id ? data : el)
+    setBd(newData)
   }
   const deleteData = (id)=>{
-
+    let isDelete = window.confirm(`¿Estás seguro de eliminar el registro con el id: ${id}?`)
+    if (isDelete) {
+      let newData = bd.filter(el => el.id !== id)
+      setBd(newData)
+    } else {
+      return;
+    }
   }
 
   return (
     <div>
       <h2>CRUD APP</h2>
-        <CrudForm/>
-        <CrudTable data={bd} />
+      <CrudForm
+        createData={createData}
+        datatoEdit={datatoEdit}
+        setdatatoEdit={setdatatoEdit}
+        updateData={updateData}
+        />
+      <CrudTable
+        data={bd}
+        deleteData={deleteData}
+        setdatatoEdit={setdatatoEdit}
+        />
     </div>
   )
 }

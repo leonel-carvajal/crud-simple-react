@@ -11,15 +11,16 @@ const Button = styled.button`
   border:1px solid #ccc;
   cursor:pointer;
 `
-const CrudTableRow = ({el}) => {
+const CrudTableRow = ({ el, deleteData, setdatatoEdit }) => {
+  let {name,constellation,id} = el
   return (
     <>
       <tr>
-        <td>{el.name}</td>
-        <td>{el.constellation}</td>
+        <td>{name}</td>
+        <td>{constellation}</td>
         <td>
-          <Button bg={'orange'}>Editar</Button>
-          <Button bg={'tomato'}>Eliminar</Button>
+          <Button bg={'orange'} onClick={()=>setdatatoEdit(el)}>Editar</Button>
+          <Button bg={'tomato'} onClick={()=>deleteData(id)}>Eliminar</Button>
         </td>
       </tr>
     </>

@@ -26,34 +26,56 @@ const InputButton = styled.input`
   color:#fff;
   font-size:1em;
 `
-const CrudForm = () => {
+const CrudForm = ({ createData, datatoEdit, setdatatoEdit, updateData }) => {
   const [form, setform] = useState(initialForm);
+  useEffect(() => {
+    if (datatoEdit) {
+      setform(datatoEdit)
+    } else {
+      setform(initialForm)
+    }
+  }, [datatoEdit]);
+
   const handleChange = (e) => {
-    
+    setform({
+      ...form,
+      [e.target.name]:e.target.value
+    })
   }
   const handleSubmit = (e) => {
-    
+    e.preventDefault()
+    if (!form.name|| !form.constellation) {
+      window.alert('Datos incompletos')
+      return;
+    }
+    if (form.id === null) {
+      createData(form)
+    } else {
+      updateData(form)
+    }
+    handleReset()
   }
-  const handleReset = (e) => {
-    
+  const handleReset = () => {
+    setform(initialForm)
+    setdatatoEdit(null)
   }
   
   return (
     <div>
-      <h3>Agregar</h3>
+      <h3>{datatoEdit ? 'Editar':'Agregar'}</h3>
       <form  onSubmit={handleSubmit}>
         <InputText
-          type='text'
           name='name'
-          placeholder='Nombre'
           onChange={handleChange}
+          placeholder='Nombre'
+          type='text'
           value={form.name}
         />
         <InputText
-          type='text'
           name='constellation'
-          placeholder='constelación'
           onChange={handleChange}
+          placeholder='constelación'
+          type='text'
           value={form.constellation}
         />
         <InputButton type='submit' value='Enviar' bg={'#924e7d'} />

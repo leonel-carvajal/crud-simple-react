@@ -1,6 +1,7 @@
 import React from 'react'
 import CrudApp from './components/CrudApp'
-import { createGlobalStyle} from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
+
 const GlobalStyle = createGlobalStyle`
   body{
     margin:0;
