@@ -32,6 +32,16 @@ const initialDb = [
 ]
 const CrudApp = () => {
   const [bd, setBd] = useState(initialDb);
+  const createData  =(data)=>{
+
+  }
+  const updateDate =(data)=>{
+
+  }
+  const deleteData = (id)=>{
+
+  }
+
   return (
     <div>
       <h2>CRUD APP</h2>
